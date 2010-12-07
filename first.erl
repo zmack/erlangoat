@@ -1,6 +1,6 @@
 -module(first).
 
--export([last/1, last_two/1, item_at/2]).
+-export([last/1, last_two/1, item_at/2, length/1]).
 
 last([]) ->
   empty;
@@ -28,3 +28,9 @@ item_at([Head|_Tail], 0) ->
   Head;
 item_at([_Head|Tail], Index) ->
   item_at(Tail, Index - 1).
+
+length([]) ->
+  0;
+length([_Head|Tail]) ->
+  1 + first:length(Tail).
+  
