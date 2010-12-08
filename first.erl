@@ -1,6 +1,6 @@
 -module(first).
 
--export([last/1, last_two/1, item_at/2, length/1]).
+-export([last/1, last_two/1, item_at/2, length/1, reverse/1]).
 
 last([]) ->
   empty;
@@ -34,3 +34,10 @@ length([]) ->
 length([_Head|Tail]) ->
   1 + first:length(Tail).
   
+reverse(List) ->
+  reverse(List, []).
+
+reverse([Head|Tail], List) ->
+  reverse(Tail, [Head|List]);
+reverse([], List) ->
+  List.
