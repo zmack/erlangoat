@@ -1,6 +1,6 @@
 -module(first).
 
--export([last/1, last_two/1, item_at/2, length/1, reverse/1]).
+-export([last/1, last_two/1, item_at/2, length/1, reverse/1, flatten/1]).
 
 last([]) ->
   empty;
@@ -40,4 +40,14 @@ reverse(List) ->
 reverse([Head|Tail], List) ->
   reverse(Tail, [Head|List]);
 reverse([], List) ->
+  List.
+
+flatten(List) ->
+  flatten(List, []).
+
+flatten([Head|Tail], List) when is_list(Head) ->
+  flatten(Head, flatten(Tail, List));
+flatten([Head|Tail], List) ->
+  [Head|flatten(Tail, List)];
+flatten([], List) ->
   List.
