@@ -1,6 +1,6 @@
 -module(first).
 
--export([last/1, last_two/1, item_at/2, length/1, reverse/1, flatten/1]).
+-export([last/1, last_two/1, item_at/2, length/1, reverse/1, flatten/1, compress/1]).
 
 last([]) ->
   empty;
@@ -51,3 +51,13 @@ flatten([Head|Tail], List) ->
   [Head|flatten(Tail, List)];
 flatten([], List) ->
   List.
+
+compress(List) ->
+  compress(List, empty).
+
+compress([Head|Tail], Last) when Head == Last ->
+  compress(Tail, Head);
+compress([Head|Tail], _Last) ->
+  [Head|compress(Tail, Head)];
+compress([], _) ->
+  [].
