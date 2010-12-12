@@ -1,6 +1,6 @@
 -module(first).
 
--export([last/1, last_two/1, item_at/2, length/1, reverse/1, flatten/1, compress/1]).
+-export([last/1, last_two/1, item_at/2, length/1, reverse/1, flatten/1, compress/1, pack/1]).
 
 last([]) ->
   empty;
@@ -61,3 +61,17 @@ compress([Head|Tail], _Last) ->
   [Head|compress(Tail, Head)];
 compress([], _) ->
   [].
+
+pack(List) ->
+  pack(List, []).
+
+pack([Head|Tail], []) ->
+  pack(Tail, [Head]);
+pack([Head|Tail], [Head|_Tail]) ->
+  pack(Tail, [Head|[Head|_Tail]]);
+pack([Head|Tail], [A|[]]) ->
+  [A|pack(Tail, [Head])];
+pack([Head|Tail], List) ->
+  [List|pack(Tail, [Head])];
+pack([], List) ->
+  List.
