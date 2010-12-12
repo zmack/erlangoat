@@ -1,6 +1,6 @@
 -module(first).
 
--export([last/1, last_two/1, item_at/2, length/1, reverse/1, flatten/1, compress/1, pack/1, rle/1]).
+-export([last/1, last_two/1, item_at/2, length/1, reverse/1, flatten/1, compress/1, pack/1, rle/1, rld/1]).
 
 last([]) ->
   empty;
@@ -87,3 +87,10 @@ rle([Head|Tail], Reps, Other) ->
   [{ Other, Reps }|rle(Tail, 1, Head)];
 rle([], Reps, Head) ->
   [{ Head, Reps }].
+
+rld([{ _Element, 0 }|Tail]) ->
+  rld(Tail);
+rld([{ Element, Times }|Tail]) ->
+  [Element|rld([{ Element, Times - 1 }|Tail])];
+rld([]) ->
+  [].
