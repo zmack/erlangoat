@@ -1,6 +1,6 @@
 -module(first).
 
--export([last/1, last_two/1, item_at/2, length/1, reverse/1, flatten/1, compress/1, pack/1, rle/1, rld/1]).
+-export([last/1, last_two/1, item_at/2, length/1, reverse/1, flatten/1, compress/1, pack/1, rle/1, rld/1, palindrome/1]).
 
 last([]) ->
   empty;
@@ -94,3 +94,12 @@ rld([{ Element, Times }|Tail]) ->
   [Element|rld([{ Element, Times - 1 }|Tail])];
 rld([]) ->
   [].
+
+palindrome(AList) ->
+  Reverse = reverse(AList),
+  case AList of
+     Reverse ->
+      true;
+    _ ->
+      false
+  end.
