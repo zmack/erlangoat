@@ -1,7 +1,7 @@
 -module(first).
 
 -export([last/1, last_two/1, item_at/2, length/1, reverse/1, flatten/1, compress/1, pack/1, rle/1, rld/1, palindrome/1]).
--export([dup/1, dup/2, drop/2, split/2]).
+-export([dup/1, dup/2, drop/2, split/2, slice/3]).
 
 last([]) ->
   empty;
@@ -135,3 +135,12 @@ split(List, 0) ->
 split([Head|Tail], Index) ->
   [First,Rest] = split(Tail, Index - 1),
   [[Head|First], Rest].
+
+slice(_, 0, 0) ->
+  [];
+slice([], _, _) ->
+  [];
+slice([Head|Tail], 0, Length) ->
+  [Head|slice(Tail, 0, Length - 1)];
+slice([_Head|Tail], Index, Length) ->
+  slice(Tail, Index - 1, Length).
