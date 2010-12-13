@@ -1,6 +1,7 @@
 -module(first).
 
 -export([last/1, last_two/1, item_at/2, length/1, reverse/1, flatten/1, compress/1, pack/1, rle/1, rld/1, palindrome/1]).
+-export([dup/1]).
 
 last([]) ->
   empty;
@@ -103,3 +104,8 @@ palindrome(AList) ->
     _ ->
       false
   end.
+
+dup([Head|Tail]) ->
+  [Head|[Head|dup(Tail)]];
+dup([]) ->
+  [].
